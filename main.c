@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/04/06 12:51:31 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/06/13 07:12:24 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utility/utils.h"
+#include "./mlx/mlx.h"
 
 int	main(int argc, char **argv)
 {
-	int	fd;
+	int		fd;
+	void	*mlx;
+	void	*mlx_win;
 
 	if (argc < 2)
 		console_error("No map file provided");
@@ -33,4 +36,8 @@ int	main(int argc, char **argv)
 		else
 			console_error("Could not read map file");
 	}
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx_loop(mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:13:26 by msciacca          #+#    #+#             */
-/*   Updated: 2022/05/21 16:53:44 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/06/13 06:56:07 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	validate_map(int fd)
 
 	i = 0;
 	count = 0;
+	line = "0";
 	while (1)
 	{
 		if (line[i] == '\n' || count == 0)
