@@ -1,0 +1,14 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/msciacca/Desktop/so_long'
+make -C mlx
+ 
+cc    -c -o main.o main.c
+cc    -c -o utility/console_output.o utility/console_output.c
+cc    -c -o utility/map_validation.o utility/map_validation.c
+cc    -c -o utility/window.o utility/window.c
+cc    -c -o utility/get_next_line/get_next_line.o utility/get_next_line/get_next_line.c
+ 
+cc    -c -o utility/get_next_line/get_next_line_utils.o utility/get_next_line/get_next_line_utils.c
+cc -Wall -Werror -Wextra -Lmlx -lmlx -framework OpenGL -framework AppKit -o so_long main.o utility/console_output.o utility/map_validation.o utility/window.o utility/get_next_line/get_next_line.o utility/get_next_line/get_next_line_utils.o
+make: Leaving directory `/Users/msciacca/Desktop/so_long'
+ 
