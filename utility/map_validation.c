@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:13:26 by msciacca          #+#    #+#             */
-/*   Updated: 2022/06/13 06:56:07 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/07/07 17:48:18 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include "./get_next_line/get_next_line.h"
-#include <stdio.h>
-
-static int	ft_strlen_map(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
-		i++;
-	return (i);
-}
 
 static int	validate_line_len(int count, char *line)
 {

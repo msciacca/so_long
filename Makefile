@@ -6,15 +6,15 @@
 #    By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 06:44:41 by matteofilib       #+#    #+#              #
-#    Updated: 2022/06/28 11:40:13 by msciacca         ###   ########.fr        #
+#    Updated: 2022/07/07 17:44:06 by msciacca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 SRCS =	main.c \
+		utility/utilities.c \
 		utility/console_output.c \
 		utility/map_validation.c \
-		utility/window.c \
 		utility/get_next_line/get_next_line.c \
 		utility/get_next_line/get_next_line_utils.c
 OBJS = $(SRCS:.c=.o)

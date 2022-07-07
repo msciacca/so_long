@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/28 11:38:49 by msciacca          #+#    #+#             */
-/*   Updated: 2022/06/28 11:39:47 by msciacca         ###   ########.fr       */
+/*   Created: 2022/06/29 00:06:53 by msciacca          #+#    #+#             */
+/*   Updated: 2022/06/29 00:07:49 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utils.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int	ft_input(int key, void *param)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *) dst = color;
+	
 }
