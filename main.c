@@ -6,17 +6,21 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/07/07 18:07:00 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/19 01:37:06 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utility/utils.h"
 #include "./mlx/mlx.h"
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
 	int			fd;
+	char		**map;
 	t_mlx_data	mlx_data;
+	int			aiaiai;
+	int			oioioi;
 
 	if (argc < 2)
 		console_error("No map file provided");
@@ -42,6 +46,20 @@ int	main(int argc, char **argv)
 		}
 	}
 	close(fd);
+	map = initialize_mem(ft_hlen_map(argv[1]), ft_strlen_gmap(argv[1]));
+	load_map(argv[1], map);
+	aiaiai = 0;
+	while (aiaiai < 6)
+	{
+		oioioi = 0;
+		while (oioioi < 34)
+		{
+			printf("%c", map[aiaiai][oioioi]);
+			oioioi++;
+		}
+		printf("\n");
+		aiaiai++;
+	}
 	mlx_data.mlx = mlx_init();
 	mlx_data.window = mlx_new_window(mlx_data.mlx,
 			(ft_strlen_gmap(argv[1]) * 64),

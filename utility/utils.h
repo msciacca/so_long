@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:17:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/07/07 18:03:49 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/19 00:16:38 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ int		ft_input(int key, void *param);
 int		ft_strlen_map(char *s);
 int		ft_hlen_map(char *file);
 int		ft_strlen_gmap(char *file);
+char	**initialize_mem(int h, int w);
+void	load_map(char *file, char **map);
 
 #endif

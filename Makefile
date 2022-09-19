@@ -6,7 +6,7 @@
 #    By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 06:44:41 by matteofilib       #+#    #+#              #
-#    Updated: 2022/07/07 17:44:06 by msciacca         ###   ########.fr        #
+#    Updated: 2022/09/19 00:35:31 by msciacca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,10 @@ SRCS =	main.c \
 		utility/console_output.c \
 		utility/map_validation.c \
 		utility/get_next_line/get_next_line.c \
-		utility/get_next_line/get_next_line_utils.c
+		utility/get_next_line/get_next_line_utils.c \
+		utility/memory_management.c
 OBJS = $(SRCS:.c=.o)
-FLAGS = -Wall -Werror -Wextra -Lmlx -lmlx -framework OpenGL -framework AppKit
+FLAGS = -g -Wall -Werror -Wextra -Lmlx -lmlx -framework OpenGL -framework AppKit
 CC = cc
 
 all: mlax $(NAME)
