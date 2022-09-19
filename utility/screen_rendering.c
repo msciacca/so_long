@@ -6,13 +6,11 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 22:14:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/19 23:51:00 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:49:24 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include "../mlx/mlx.h"
-#include <stdio.h>
 
 static void	initialize_img_cache(t_img_cache *images)
 {
@@ -24,43 +22,43 @@ static void	initialize_img_cache(t_img_cache *images)
 	images->exit = malloc(sizeof(t_img_struct));
 }
 
-void	generate_new_frame(t_mlx_data mlx_data, t_img_cache images)
+void	generate_new_frame(t_mlx_data *mlx_data)
 {
 	int	i;
 	int	k;
 
 	i = 0;
-	while (i < mlx_data.h)
+	while (i < mlx_data->h)
 	{
 		k = 0;
-		while (k < mlx_data.w)
+		while (k < mlx_data->w)
 		{
-			if (mlx_data.map[i][k] == '0')
-				mlx_put_image_to_window(mlx_data.mlx, mlx_data.window,
-					images.bck->addr, k * 64, i * 64);
-			else if (mlx_data.map[i][k] == '1')
-				mlx_put_image_to_window(mlx_data.mlx, mlx_data.window,
-					images.wall->addr, k * 64, i * 64);
-			else if (mlx_data.map[i][k] == 'C')
+			if (mlx_data->map[i][k] == '0')
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.bck->addr, k * 64, i * 64);
+			else if (mlx_data->map[i][k] == '1')
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.wall->addr, k * 64, i * 64);
+			else if (mlx_data->map[i][k] == 'C')
 			{
-				mlx_put_image_to_window(mlx_data.mlx, mlx_data.window,
-					images.bck->addr, k * 64, i * 64);
-				mlx_put_image_to_window(mlx_data.mlx, mlx_data.window,
-					images.coll->addr, k * 64, i * 64);
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.bck->addr, k * 64, i * 64);
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.coll->addr, k * 64, i * 64);
 			}
-			else if (mlx_data.map[i][k] == 'E')
+			else if (mlx_data->map[i][k] == 'E')
 			{
-				mlx_put_image_to_window(mlx_data.mlx, mlx_data.window,
-					images.bck->addr, k * 64, i * 64);
-				mlx_put_image_to_window(mlx_data.mlx, mlx_data.window,
-					images.exit->addr, k * 64, i * 64);
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.bck->addr, k * 64, i * 64);
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.exit->addr, k * 64, i * 64);
 			}
-			else if (mlx_data.map[i][k] == 'P')
+			else if (mlx_data->map[i][k] == 'P')
 			{
-				mlx_put_image_to_window(mlx_data.mlx, mlx_data.window,
-					images.bck->addr, k * 64, i * 64);
-				mlx_put_image_to_window(mlx_data.mlx, mlx_data.window,
-					images.ply->addr, k * 64, i * 64);
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.bck->addr, k * 64, i * 64);
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.ply->addr, k * 64, i * 64);
 			}
 			k++;
 		}

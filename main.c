@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/19 23:45:10 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:50:06 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(int argc, char **argv)
 {
 	int			fd;
 	t_mlx_data	mlx_data;
-	t_img_cache	images;
 
 	if (argc < 2)
 		console_error("No map file provided");
@@ -49,9 +48,10 @@ int	main(int argc, char **argv)
 	mlx_data.map = initialize_mem(mlx_data.h, mlx_data.w);
 	load_map(argv[1], mlx_data.map);
 	mlx_data.mlx = mlx_init();
-	load_images(mlx_data.mlx, &images);
+	load_images(mlx_data.mlx, &mlx_data.images);
 	mlx_data.window = mlx_new_window(mlx_data.mlx, mlx_data.w,
 			mlx_data.h, "so_long");
-	generate_new_frame(mlx_data, images);
+	generate_new_frame(&mlx_data);
+	mlx_key_hook(mlx_data.window, ft_input, &mlx_data);
 	mlx_loop(mlx_data.mlx);
 }

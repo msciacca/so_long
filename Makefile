@@ -6,7 +6,7 @@
 #    By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 06:44:41 by matteofilib       #+#    #+#              #
-#    Updated: 2022/09/19 23:05:48 by msciacca         ###   ########.fr        #
+#    Updated: 2022/09/20 00:28:09 by msciacca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRCS =	main.c \
 		utility/get_next_line/get_next_line.c \
 		utility/get_next_line/get_next_line_utils.c \
 		utility/memory_management.c \
-		utility/screen_rendering.c
+		utility/screen_rendering.c \
+		utility/hook.c \
+		utility/location_finder.c
 OBJS = $(SRCS:.c=.o)
 FLAGS = -g -Wall -Werror -Wextra -Lmlx -lmlx -framework OpenGL -framework AppKit
 CC = cc
