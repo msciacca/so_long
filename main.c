@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/19 01:37:06 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/19 23:45:10 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
 int	main(int argc, char **argv)
 {
 	int			fd;
-	char		**map;
 	t_mlx_data	mlx_data;
-	int			aiaiai;
-	int			oioioi;
+	t_img_cache	images;
 
 	if (argc < 2)
 		console_error("No map file provided");
@@ -46,23 +44,14 @@ int	main(int argc, char **argv)
 		}
 	}
 	close(fd);
-	map = initialize_mem(ft_hlen_map(argv[1]), ft_strlen_gmap(argv[1]));
-	load_map(argv[1], map);
-	aiaiai = 0;
-	while (aiaiai < 6)
-	{
-		oioioi = 0;
-		while (oioioi < 34)
-		{
-			printf("%c", map[aiaiai][oioioi]);
-			oioioi++;
-		}
-		printf("\n");
-		aiaiai++;
-	}
+	mlx_data.w = ft_strlen_gmap(argv[1]) * 64;
+	mlx_data.h = ft_hlen_map(argv[1]) * 64;
+	mlx_data.map = initialize_mem(mlx_data.h, mlx_data.w);
+	load_map(argv[1], mlx_data.map);
 	mlx_data.mlx = mlx_init();
-	mlx_data.window = mlx_new_window(mlx_data.mlx,
-			(ft_strlen_gmap(argv[1]) * 64),
-			(ft_hlen_map(argv[1]) * 64), "so_long");
+	load_images(mlx_data.mlx, &images);
+	mlx_data.window = mlx_new_window(mlx_data.mlx, mlx_data.w,
+			mlx_data.h, "so_long");
+	generate_new_frame(mlx_data, images);
 	mlx_loop(mlx_data.mlx);
 }
