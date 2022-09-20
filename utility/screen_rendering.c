@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 22:14:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/20 00:49:24 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:44:21 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	initialize_img_cache(t_img_cache *images)
 	images->bck = malloc(sizeof(t_img_struct));
 	images->wall = malloc(sizeof(t_img_struct));
 	images->ply = malloc(sizeof(t_img_struct));
+	images->ply_bsk = malloc(sizeof(t_img_struct));
 	images->coll = malloc(sizeof(t_img_struct));
 	images->enemy = malloc(sizeof(t_img_struct));
 	images->exit = malloc(sizeof(t_img_struct));
@@ -24,9 +25,14 @@ static void	initialize_img_cache(t_img_cache *images)
 
 void	generate_new_frame(t_mlx_data *mlx_data)
 {
-	int	i;
-	int	k;
+	int				i;
+	int				k;
+	t_img_struct	*ply;
 
+	if (mlx_data->collectibles > 0)
+		ply = mlx_data->images.ply_bsk->addr;
+	else
+		ply = mlx_data->images.ply->addr;
 	i = 0;
 	while (i < mlx_data->h)
 	{
@@ -58,7 +64,7 @@ void	generate_new_frame(t_mlx_data *mlx_data)
 				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
 					mlx_data->images.bck->addr, k * 64, i * 64);
 				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
-					mlx_data->images.ply->addr, k * 64, i * 64);
+					ply, k * 64, i * 64);
 			}
 			k++;
 		}
@@ -75,6 +81,8 @@ void	load_images(void *mlx, t_img_cache *images)
 			&images->wall->w, &images->wall->h);
 	images->ply->addr = mlx_xpm_file_to_image(mlx, "./img/CRFront.xpm",
 			&images->ply->w, &images->ply->h);
+	images->ply_bsk->addr = mlx_xpm_file_to_image(mlx, "./img/CRFront3.xpm",
+			&images->ply_bsk->w, &images->ply_bsk->h);
 	images->coll->addr = mlx_xpm_file_to_image(mlx, "./img/mela.xpm",
 			&images->coll->w, &images->coll->h);
 	images->enemy->addr = mlx_xpm_file_to_image(mlx, "./img/wolfdw.xpm",

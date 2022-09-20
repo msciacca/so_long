@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/20 00:50:06 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:38:34 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	main(int argc, char **argv)
 	mlx_data.w = ft_strlen_gmap(argv[1]) * 64;
 	mlx_data.h = ft_hlen_map(argv[1]) * 64;
 	mlx_data.map = initialize_mem(mlx_data.h, mlx_data.w);
+	mlx_data.movements = 0;
+	mlx_data.collectibles = 0;
 	load_map(argv[1], mlx_data.map);
 	mlx_data.mlx = mlx_init();
 	load_images(mlx_data.mlx, &mlx_data.images);
@@ -54,4 +56,5 @@ int	main(int argc, char **argv)
 	generate_new_frame(&mlx_data);
 	mlx_key_hook(mlx_data.window, ft_input, &mlx_data);
 	mlx_loop(mlx_data.mlx);
+	return (0);
 }

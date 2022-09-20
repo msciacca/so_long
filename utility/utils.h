@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:17:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/20 00:49:45 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:41:18 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_img_cache
 	t_img_struct	*bck;
 	t_img_struct	*wall;
 	t_img_struct	*ply;
+	t_img_struct	*ply_bsk;
 	t_img_struct	*coll;
 	t_img_struct	*enemy;
 	t_img_struct	*exit;
@@ -50,6 +51,8 @@ typedef struct s_mlx_data
 	int			w;
 	int			h;
 	char		**map;
+	int			movements;
+	int			collectibles;
 	t_img_cache	images;
 }				t_mlx_data;
 
@@ -67,5 +70,6 @@ void	generate_new_frame(t_mlx_data *mlx_data);
 void	load_images(void *mlx, t_img_cache *images);
 int		find_x(t_mlx_data *mlx_data, char c);
 int		find_y(t_mlx_data *mlx_data, char c);
+void	move_player(int key, t_mlx_data *mlx_data);
 
 #endif
