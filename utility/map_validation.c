@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:13:26 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 19:47:51 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:25:38 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	validate_map(int fd, t_mlx_data *mlx_data)
 	i = 0;
 	count = 0;
 	line = "0";
-	mlx_data->total_collectibles = 0;
 	while (1)
 	{
 		if (line[i] == '\n' || count == 0)
@@ -106,12 +105,11 @@ int	validate_map(int fd, t_mlx_data *mlx_data)
 		else if (line[i] != '0' && line[i] != '1'
 			&& line[i] != 'C' && line[i] != 'E' && line[i] != 'P')
 			return (1);
-		if (line[i] == 'C')
-			mlx_data->total_collectibles++;
 		i++;
 	}
-	if (!(comps.c != 0 && comps.e != 0 && comps.p != 0))
+	if (!(comps.c != 0 && comps.e != 0 && comps.p != 0) || comps.p > 1)
 		return (1);
+	mlx_data->total_collectibles = comps.c;
 	free(line);
 	return (0);
 }

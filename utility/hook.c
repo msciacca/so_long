@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 00:06:53 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 20:24:48 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:47:20 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,17 @@ int	ft_input(int key, t_mlx_data *mlx_data)
 
 int	enemy_movement(t_mlx_data *mlx_data)
 {
-	if (mlx_data->time_future == time(0))
+	if (mlx_data->time_future < current_timestamp())
 	{
 		if ((find_y(mlx_data, 'P') - find_y(mlx_data, 'N') > 0))
 			move_enemy('d', mlx_data);
 		else if ((find_y(mlx_data, 'P') - find_y(mlx_data, 'N') < 0))
 			move_enemy('u', mlx_data);
-		mlx_data->time_future = time(0) + 1;
+		else if ((find_x(mlx_data, 'P') - find_x(mlx_data, 'N')) > 0)
+			move_enemy('r', mlx_data);
+		else if ((find_x(mlx_data, 'P') - find_x(mlx_data, 'N')) < 0)
+			move_enemy('l', mlx_data);
+		mlx_data->time_future = current_timestamp() + 200;
 	}
 	return (0);
 }

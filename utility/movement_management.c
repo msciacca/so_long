@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_management.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:47:28 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 20:27:02 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:51:39 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,6 @@ static int	check_collision(t_mlx_data *mlx_data, int x, int y)
 	return (0);
 }
 
-static int	check_enemy_collision(t_mlx_data *mlx_data, int x, int y)
-{
-	if (mlx_data->map[y][x] == '0')
-		return (1);
-	return (0);
-}
-
 void	move_player(int key, t_mlx_data *mlx_data)
 {
 	int	x;
@@ -48,13 +41,37 @@ void	move_player(int key, t_mlx_data *mlx_data)
 	x_new = x;
 	y_new = y;
 	if (key == 13)
+	{
 		y_new--;
+		if (mlx_data->collectibles > 0)
+			mlx_data->ply_img = *mlx_data->images.ply_u_bsk;
+		else
+			mlx_data->ply_img = *mlx_data->images.ply_u;
+	}
 	else if (key == 0)
+	{
 		x_new--;
+		if (mlx_data->collectibles > 0)
+			mlx_data->ply_img = *mlx_data->images.ply_l_bsk;
+		else
+			mlx_data->ply_img = *mlx_data->images.ply_l;
+	}
 	else if (key == 1)
+	{
 		y_new++;
+		if (mlx_data->collectibles > 0)
+			mlx_data->ply_img = *mlx_data->images.ply_bsk;
+		else
+			mlx_data->ply_img = *mlx_data->images.ply;
+	}
 	else if (key == 2)
+	{
 		x_new++;
+		if (mlx_data->collectibles > 0)
+			mlx_data->ply_img = *mlx_data->images.ply_r_bsk;
+		else
+			mlx_data->ply_img = *mlx_data->images.ply_r;
+	}
 	if (check_collision(mlx_data, x_new, y_new))
 	{
 		mlx_data->map[y][x] = '0';
@@ -76,10 +93,26 @@ void	move_enemy(char dir, t_mlx_data *mlx_data)
 	x_new = x;
 	y_new = y;
 	if (dir == 'd')
+	{
 		y_new++;
+		mlx_data->enemy_img = *mlx_data->images.enemy;
+	}
 	else if (dir == 'u')
+	{
 		y_new--;
-	if ((y_new != y || x_new != x) && check_enemy_collision(mlx_data, x_new, y_new))
+		mlx_data->enemy_img = *mlx_data->images.enemy_u;
+	}
+	else if (dir == 'r')
+	{
+		x_new++;
+		mlx_data->enemy_img = *mlx_data->images.enemy_r;
+	}
+	else if (dir == 'l')
+	{
+		x_new--;
+		mlx_data->enemy_img = *mlx_data->images.enemy_l;
+	}
+	if ((y_new != y || x_new != x) && mlx_data->map[y_new][x_new] == '0')
 	{
 		mlx_data->map[y][x] = '0';
 		mlx_data->map[y_new][x_new] = 'N';

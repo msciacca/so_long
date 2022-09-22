@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utilities.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:43:08 by msciacca          #+#    #+#             */
-/*   Updated: 2022/07/07 18:04:58 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:46:35 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include <stdio.h>
+
+long long current_timestamp(void) {
+	struct timeval	te;
+	long long		ms;
+
+	gettimeofday(&te, 0);
+	ms = te.tv_sec * 1000LL + te.tv_usec / 1000;
+	return (ms);
+}
 
 int	ft_strlen_map(char *s)
 {
