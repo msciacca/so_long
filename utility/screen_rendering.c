@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 22:14:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 19:17:47 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:45:07 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ void	generate_new_frame(t_mlx_data *mlx_data)
 					mlx_data->images.bck->addr, k * 64, i * 64);
 				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
 					ply, k * 64, i * 64);
+			}
+			else if (mlx_data->map[i][k] == 'N')
+			{
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.bck->addr, k * 64, i * 64);
+				mlx_put_image_to_window(mlx_data->mlx, mlx_data->window,
+					mlx_data->images.enemy->addr, k * 64, i * 64);
 			}
 			k++;
 		}

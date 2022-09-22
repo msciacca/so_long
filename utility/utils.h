@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:17:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 19:29:15 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:24:06 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include "../mlx/mlx.h"
 # include <stdio.h>
+# include <time.h>
 
 typedef struct s_val_components
 {
@@ -55,6 +56,7 @@ typedef struct s_mlx_data
 	int			movements;
 	int			collectibles;
 	int			total_collectibles;
+	int			time_future;
 	t_img_cache	images;
 }				t_mlx_data;
 
@@ -73,5 +75,7 @@ void	load_images(void *mlx, t_img_cache *images);
 int		find_x(t_mlx_data *mlx_data, char c);
 int		find_y(t_mlx_data *mlx_data, char c);
 void	move_player(int key, t_mlx_data *mlx_data);
+int		enemy_movement(t_mlx_data *mlx_data);
+void	move_enemy(char dir, t_mlx_data *mlx_data);
 
 #endif

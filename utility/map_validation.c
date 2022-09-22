@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:13:26 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 19:29:04 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:47:51 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ int	validate_map(int fd, t_mlx_data *mlx_data)
 		}
 		else if (line[i] == '\0')
 			break ;
+		if (line[i] == 'N')
+		{
+			i++;
+			continue ;
+		}
 		else if (line[i] != '0' && line[i] != '1'
 			&& line[i] != 'C' && line[i] != 'E' && line[i] != 'P')
 			return (1);

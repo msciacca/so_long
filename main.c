@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 19:27:45 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:17:17 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ int	main(int argc, char **argv)
 	mlx_data.map = initialize_mem(mlx_data.h, mlx_data.w);
 	mlx_data.movements = 0;
 	mlx_data.collectibles = 0;
+	mlx_data.time_future = time(0) + 1;
 	load_map(argv[1], mlx_data.map);
 	mlx_data.mlx = mlx_init();
 	load_images(mlx_data.mlx, &mlx_data.images);
 	mlx_data.window = mlx_new_window(mlx_data.mlx, mlx_data.w,
 			mlx_data.h, "so_long");
 	generate_new_frame(&mlx_data);
+	mlx_loop_hook(mlx_data.mlx, enemy_movement, &mlx_data);
 	mlx_hook(mlx_data.window, 2, 1L<<0, ft_input, &mlx_data);
 	mlx_loop(mlx_data.mlx);
 	return (0);
