@@ -6,7 +6,7 @@
 #    By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 06:44:41 by matteofilib       #+#    #+#              #
-#    Updated: 2022/09/20 18:47:23 by msciacca         ###   ########.fr        #
+#    Updated: 2022/09/22 18:49:22 by msciacca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,12 @@ SRCS =	main.c \
 		utility/screen_rendering.c \
 		utility/hook.c \
 		utility/location_finder.c \
-		utility/movement_management.c
+		utility/movement_management.c \
+		utility/ft_printf/ft_printf.c \
+		utility/ft_printf/ft_printf_utils.c \
+		utility/ft_printf/libft/ft_putchar_fd.c \
+		utility/ft_printf/libft/ft_putstr_fd.c \
+		utility/ft_printf/libft/ft_itoa.c
 OBJS = $(SRCS:.c=.o)
 FLAGS = -g -Wall -Werror -Wextra -Lmlx -lmlx -framework OpenGL -framework AppKit
 CC = cc

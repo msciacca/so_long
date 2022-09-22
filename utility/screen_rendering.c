@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 22:14:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/20 19:44:21 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:17:47 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ static void	initialize_img_cache(t_img_cache *images)
 	images->coll = malloc(sizeof(t_img_struct));
 	images->enemy = malloc(sizeof(t_img_struct));
 	images->exit = malloc(sizeof(t_img_struct));
+}
+
+static int rgb_to_int(double r, double g, double b)
+{
+	int color = 0;
+	color |= (int)(b * 255);
+	color |= (int)(g * 255) << 8;
+	color |= (int)(r * 255) << 16;
+	return (color);
 }
 
 void	generate_new_frame(t_mlx_data *mlx_data)
@@ -70,6 +79,11 @@ void	generate_new_frame(t_mlx_data *mlx_data)
 		}
 		i++;
 	}
+	mlx_string_put(mlx_data->mlx, mlx_data->window, mlx_data->w - 70, 24, rgb_to_int(250, 250, 250), "MOVES:");
+	mlx_string_put(mlx_data->mlx, mlx_data->window, mlx_data->w - 26, 24, rgb_to_int(250, 250, 250), ft_itoa(mlx_data->movements));
+	mlx_string_put(mlx_data->mlx, mlx_data->window, mlx_data->w - 70, 36, rgb_to_int(250, 250, 250), "APPLE:");
+	mlx_string_put(mlx_data->mlx, mlx_data->window, mlx_data->w - 26, 36, rgb_to_int(250, 250, 250), ft_itoa(mlx_data->collectibles));
+	ft_printf("Moves: %d\n", mlx_data->movements);
 }
 
 void	load_images(void *mlx, t_img_cache *images)

@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/20 19:38:34 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:27:45 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		if (fd > 0)
 		{
-			if (validate_map(fd))
+			if (validate_map(fd, &mlx_data))
 			{
 				console_error("Invalid map file");
 				return (0);
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 	mlx_data.window = mlx_new_window(mlx_data.mlx, mlx_data.w,
 			mlx_data.h, "so_long");
 	generate_new_frame(&mlx_data);
-	mlx_key_hook(mlx_data.window, ft_input, &mlx_data);
+	mlx_hook(mlx_data.window, 2, 1L<<0, ft_input, &mlx_data);
 	mlx_loop(mlx_data.mlx);
 	return (0);
 }

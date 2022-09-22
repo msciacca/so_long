@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/29 00:06:53 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 19:16:48 by msciacca         ###   ########.fr       */
+/*   Created: 2022/01/15 10:50:32 by msciacca          #+#    #+#             */
+/*   Updated: 2022/02/02 19:51:47 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./utils.h"
+#include "libft.h"
 
-int	ft_input(int key, t_mlx_data *mlx_data)
+int	ft_putchar_fd(char c, int fd)
 {
-	int	x;
-	int	y;
-
-	x = find_x(mlx_data, 'P');
-	y = find_y(mlx_data, 'P');
-	if (key == 53)
-		exit(0);
-	else if (key == 13 || key == 0 || key == 1 || key == 2)
-		move_player(key, mlx_data);
-	return (0);
+	write(fd, &c, 1);
+	return (1);
 }
