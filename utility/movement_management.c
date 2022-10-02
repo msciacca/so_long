@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_management.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:47:28 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 23:51:39 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/01 23:42:42 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,12 @@ void	move_enemy(char dir, t_mlx_data *mlx_data)
 		x_new--;
 		mlx_data->enemy_img = *mlx_data->images.enemy_l;
 	}
-	if ((y_new != y || x_new != x) && mlx_data->map[y_new][x_new] == '0')
+	if ((y_new != y || x_new != x) && (mlx_data->map[y_new][x_new] == '0' || mlx_data->map[y_new][x_new] == '1'))
 	{
 		mlx_data->map[y][x] = '0';
 		mlx_data->map[y_new][x_new] = 'N';
 		generate_new_frame(mlx_data);
 	}
+	else if ((y_new != y || x_new != x) && mlx_data->map[y_new][x_new] == 'P')
+		exit (0);
 }

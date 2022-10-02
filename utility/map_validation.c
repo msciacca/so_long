@@ -3,113 +3,117 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:13:26 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 23:25:38 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/02 03:42:32 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static int	validate_line_len(int count, char *line)
+static int	validate_line_len(t_val_components *c)
 {
 	static int	max_line_len = 0;
 
-	if (count == 1)
-		max_line_len = ft_strlen_map(line);
-	else if (count > 1 && max_line_len != ft_strlen_map(line))
+	if (c->count == 1)
+		max_line_len = ft_strlen_map(c->line);
+	else if (c->count > 1 && max_line_len != ft_strlen_map(c->line))
 		return (1);
 	return (0);
 }
 
-static void	validate_components(int count, t_val_components *comps, char *s)
+static void	validate_components(t_val_components *c)
 {
 	int	i;
 
 	i = 0;
-	if (count == 1)
+	if (c->count == 1)
 	{
-		comps->c = 0;
-		comps->e = 0;
-		comps->p = 0;
+		c->c = 0;
+		c->e = 0;
+		c->p = 0;
+		c->n = 0;
 	}
-	while (s[i] && s[i] != '\n')
+	while (c->line[i] && c->line[i] != '\n')
 	{
-		if (s[i] == 'C')
-			comps->c++;
-		else if (s[i] == 'E')
-			comps->e++;
-		else if (s[i] == 'P')
-			comps->p++;
+		if (c->line[i] == 'C')
+			c->c++;
+		else if (c->line[i] == 'E')
+			c->e++;
+		else if (c->line[i] == 'P')
+			c->p++;
+		else if (c->line[i] == 'N')
+			c->n++;
 		i++;
 	}
 }
 
-static int	validate_borders(int count, char *line)
+static int	validate_borders(t_val_components *c)
 {
 	int	i;
 
-	if (count == 1)
+	if (c->count == 1)
 	{
 		i = -1;
-		while (line[++i])
-			if (line[i] != '1' && line[i] != '\n')
+		while (c->line[++i])
+			if (c->line[i] != '1' && c->line[i] != '\n')
 				return (1);
 	}
-	else if (line[ft_strlen_map(line)] == '\n')
+	else if (c->line[ft_strlen_map(c->line)] == '\n')
 	{
-		if (line[0] != '1' || line[ft_strlen_map(line) - 1] != '1')
+		if (c->line[0] != '1' || c->line[ft_strlen_map(c->line) - 1] != '1')
 			return (1);
 	}
-	else if (count > 1 && line[ft_strlen_map(line) + 1] == '\0')
+	else if (c->count > 1 && c->line[ft_strlen_map(c->line) + 1] == '\0')
 	{
 		i = -1;
-		while (line[++i])
-			if (line[i] != '1')
+		while (c->line[++i])
+			if (c->line[i] != '1')
 				return (1);
+	}
+	return (0);
+}
+
+static int	validate_map2(int fd, t_val_components *c)
+{
+	while (1)
+	{
+		c->i++;
+		if (c->line[c->i] == '\n' || c->count == 0)
+		{
+			c->line = get_next_line(fd);
+			c->i = -1;
+			c->count++;
+			if (validate_line_len(c))
+				return (1);
+			if (validate_borders(c))
+				return (1);
+			validate_components(c);
+		}
+		else if (c->line[c->i] == '\0')
+			break ;
+		if (c->line[c->i] == 'N')
+			continue ;
+		if (c->line[c->i] != '0' && c->line[c->i] != '1'
+			&& c->line[c->i] != 'C' && c->line[c->i] != 'E'
+			&& c->line[c->i] != 'P')
+			return (1);
 	}
 	return (0);
 }
 
 int	validate_map(int fd, t_mlx_data *mlx_data)
 {
-	char				*line;
-	int					i;
-	int					count;
-	t_val_components	comps;
+	t_val_components	c;
 
-	i = 0;
-	count = 0;
-	line = "0";
-	while (1)
-	{
-		if (line[i] == '\n' || count == 0)
-		{
-			line = get_next_line(fd);
-			i = 0;
-			count++;
-			if (validate_line_len(count, line))
-				return (1);
-			if (validate_borders(count, line))
-				return (1);
-			validate_components(count, &comps, line);
-		}
-		else if (line[i] == '\0')
-			break ;
-		if (line[i] == 'N')
-		{
-			i++;
-			continue ;
-		}
-		else if (line[i] != '0' && line[i] != '1'
-			&& line[i] != 'C' && line[i] != 'E' && line[i] != 'P')
-			return (1);
-		i++;
-	}
-	if (!(comps.c != 0 && comps.e != 0 && comps.p != 0) || comps.p > 1)
+	c.i = -1;
+	c.count = 0;
+	c.line = "0";
+	if (validate_map2(fd, &c))
 		return (1);
-	mlx_data->total_collectibles = comps.c;
-	free(line);
+	if (c.c <= 0 || c.p != 1 || c.e != 1 || c.n != 1)
+		return (1);
+	mlx_data->total_collectibles = c.c;
 	return (0);
 }

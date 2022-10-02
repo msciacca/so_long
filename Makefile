@@ -6,7 +6,7 @@
 #    By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/13 06:44:41 by matteofilib       #+#    #+#              #
-#    Updated: 2022/09/22 18:49:22 by msciacca         ###   ########.fr        #
+#    Updated: 2022/10/02 02:59:45 by msciacca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS =	main.c \
 		utility/get_next_line/get_next_line_utils.c \
 		utility/memory_management.c \
 		utility/screen_rendering.c \
+		utility/screen_render_utility.c \
 		utility/hook.c \
 		utility/location_finder.c \
 		utility/movement_management.c \

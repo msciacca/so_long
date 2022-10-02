@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:17:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 23:47:47 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/02 03:13:59 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@
 
 typedef struct s_val_components
 {
-	int	c;
-	int	e;
-	int	p;
+	int		c;
+	int		e;
+	int		p;
+	int		n;
+	int		i;
+	int		count;
+	char	*line;
 }	t_val_components;
 
 typedef struct s_img_struct
@@ -83,11 +87,14 @@ char		**initialize_mem(int h, int w);
 void		load_map(char *file, char **map);
 void		generate_new_frame(t_mlx_data *mlx_data);
 void		load_images(t_mlx_data *mlx_data);
+void		load_images2(t_mlx_data *mlx_data);
+void		load_images3(t_mlx_data *mlx_data);
 int			find_x(t_mlx_data *mlx_data, char c);
 int			find_y(t_mlx_data *mlx_data, char c);
 void		move_player(int key, t_mlx_data *mlx_data);
 int			enemy_movement(t_mlx_data *mlx_data);
 void		move_enemy(char dir, t_mlx_data *mlx_data);
 long long	current_timestamp(void);
+void		screen_points(t_mlx_data *mlx_data);
 
 #endif
