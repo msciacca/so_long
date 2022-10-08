@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 00:06:53 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/02 02:44:55 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:59:05 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_input(int key, t_mlx_data *mlx_data)
 
 int	enemy_movement(t_mlx_data *mlx_data)
 {
-	if (mlx_data->time_future < current_timestamp())
+	if (mlx_data->time_future < current_timestamp() && mlx_data->enemy_presence)
 	{
 		if ((find_y(mlx_data, 'P') - find_y(mlx_data, 'N')) > 0)
 			move_enemy('d', mlx_data);

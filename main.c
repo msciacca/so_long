@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 23:47:07 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/08 18:31:53 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

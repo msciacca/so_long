@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:17:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/02 03:13:59 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:58:04 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_mlx_data
 	int					collectibles;
 	int					total_collectibles;
 	long long			time_future;
+	int					enemy_presence;
 	t_img_struct		enemy_img;
 	t_img_struct		ply_img;
 	t_img_cache			images;

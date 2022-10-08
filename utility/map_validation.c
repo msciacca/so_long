@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:13:26 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/02 03:42:32 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:58:53 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,6 @@ static int	validate_map2(int fd, t_val_components *c)
 			break ;
 		if (c->line[c->i] == 'N')
 			continue ;
-		if (c->line[c->i] != '0' && c->line[c->i] != '1'
-			&& c->line[c->i] != 'C' && c->line[c->i] != 'E'
-			&& c->line[c->i] != 'P')
-			return (1);
 	}
 	return (0);
 }
@@ -112,8 +108,13 @@ int	validate_map(int fd, t_mlx_data *mlx_data)
 	c.line = "0";
 	if (validate_map2(fd, &c))
 		return (1);
-	if (c.c <= 0 || c.p != 1 || c.e != 1 || c.n != 1)
+	printf("C: %d - P: %d - E: %d - N: %d", c.c, c.p, c.e, c.n);
+	if (c.c <= 0 || c.p != 1 || c.e != 1 || c.n > 1)
 		return (1);
+	if (c.n == 1)
+		mlx_data->enemy_presence = 1;
+	else
+		mlx_data->enemy_presence = 0;
 	mlx_data->total_collectibles = c.c;
 	return (0);
 }
