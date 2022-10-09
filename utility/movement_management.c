@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:47:28 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/08 17:59:52 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/10 00:04:44 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ void	move_enemy(char dir, t_mlx_data *mlx_data)
 		x_new--;
 		mlx_data->enemy_img = *mlx_data->images.enemy_l;
 	}
-	if ((y_new != y || x_new != x) && (mlx_data->map[y_new][x_new] == '0' || mlx_data->map[y_new][x_new] == '1'))
+	if ((y_new != y || x_new != x) && (mlx_data->map[y_new][x_new] == '0'
+		|| mlx_data->map[y_new][x_new] == '1'))
 	{
 		mlx_data->map[y][x] = '0';
 		mlx_data->map[y_new][x_new] = 'N';

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utilities.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:43:08 by msciacca          #+#    #+#             */
-/*   Updated: 2022/09/22 23:46:35 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/10 00:05:38 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-long long current_timestamp(void) {
+long long	current_timestamp(void)
+{
 	struct timeval	te;
 	long long		ms;
 
