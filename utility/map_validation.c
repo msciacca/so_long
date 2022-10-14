@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:13:26 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/08 17:58:53 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:01:41 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ static int	validate_map2(int fd, t_val_components *c)
 		c->i++;
 		if (c->line[c->i] == '\n' || c->count == 0)
 		{
+			if (c->line[0] != 'h' && c->line)
+				free(c->line);
 			c->line = get_next_line(fd);
 			c->i = -1;
 			c->count++;
@@ -96,6 +98,7 @@ static int	validate_map2(int fd, t_val_components *c)
 		if (c->line[c->i] == 'N')
 			continue ;
 	}
+	free(c->line);
 	return (0);
 }
 
@@ -105,10 +108,9 @@ int	validate_map(int fd, t_mlx_data *mlx_data)
 
 	c.i = -1;
 	c.count = 0;
-	c.line = "0";
+	c.line = "h";
 	if (validate_map2(fd, &c))
 		return (1);
-	printf("C: %d - P: %d - E: %d - N: %d", c.c, c.p, c.e, c.n);
 	if (c.c <= 0 || c.p != 1 || c.e != 1 || c.n > 1)
 		return (1);
 	if (c.n == 1)

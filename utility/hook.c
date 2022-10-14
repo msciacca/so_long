@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 00:06:53 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/10 00:02:05 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:02:21 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	ft_input(int key, t_mlx_data *mlx_data)
 {
 	if (key == 53)
+	{
+		purge_all_memory(mlx_data);
 		exit(0);
+	}
 	else if (key == 13 || key == 0 || key == 1 || key == 2)
 		move_player(key, mlx_data);
 	return (0);

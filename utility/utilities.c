@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilities.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:43:08 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/10 00:05:38 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:00:39 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ int	ft_hlen_map(char *file)
 
 	i = 0;
 	count = 0;
-	line = "0";
+	line = "h";
 	fd = open(file, O_RDONLY);
 	while (1)
 	{
 		if (line[i] == '\n' || count == 0)
 		{
+			if (line[0] != 'h' && line)
+				free(line);
 			line = get_next_line(fd);
 			i = 0;
 			count++;

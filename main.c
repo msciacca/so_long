@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/08 18:31:53 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:27:10 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 	close(fd);
 	mlx_data.w = ft_strlen_gmap(argv[1]) * 64;
 	mlx_data.h = ft_hlen_map(argv[1]) * 64;
-	mlx_data.map = initialize_mem(mlx_data.h, mlx_data.w);
+	mlx_data.map = initialize_mem(mlx_data.h / 64, mlx_data.w / 64);
 	mlx_data.movements = 0;
 	mlx_data.collectibles = 0;
 	mlx_data.time_future = current_timestamp() + 500;

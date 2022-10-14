@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screen_rendering.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 22:14:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/02 02:58:54 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:34:24 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void	generate_new_frame(t_mlx_data *mlx_data)
 	int	k;
 
 	i = 0;
-	while (i < mlx_data->h)
+	while (i < (mlx_data->h / 64))
 	{
 		k = 0;
-		while (k < mlx_data->w)
+		while (k < (mlx_data->w / 64))
 		{
 			generate_new_frame_conditions(mlx_data, i, k);
 			k++;

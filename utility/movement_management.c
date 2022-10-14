@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_management.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:47:28 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/10 00:04:44 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:03:08 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,20 @@ static int	check_collision(t_mlx_data *mlx_data, int x, int y)
 		return (1);
 	else if (mlx_data->map[y][x] == 'E' && mlx_data->total_collectibles
 			== mlx_data->collectibles)
+	{
+		purge_all_memory(mlx_data);
 		exit (0);
+	}
 	else if (mlx_data->map[y][x] == 'C')
 	{
 		mlx_data->collectibles++;
 		return (1);
 	}
 	else if (mlx_data->map[y][x] == 'N')
+	{
+		purge_all_memory(mlx_data);
 		exit (0);
+	}
 	return (0);
 }
 
@@ -120,5 +126,8 @@ void	move_enemy(char dir, t_mlx_data *mlx_data)
 		generate_new_frame(mlx_data);
 	}
 	else if ((y_new != y || x_new != x) && mlx_data->map[y_new][x_new] == 'P')
+	{
+		purge_all_memory(mlx_data);
 		exit (0);
+	}
 }

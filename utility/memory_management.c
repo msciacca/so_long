@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 23:45:18 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/10 00:02:26 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:59:40 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	load_map(char *file, char **map)
 	{
 		if (line[i] == '\n')
 		{
+			free(line);
 			line = get_next_line(fd);
 			map[k][i] = 0;
 			i = 0;
@@ -53,4 +54,14 @@ void	load_map(char *file, char **map)
 	}
 	free(line);
 	close(fd);
+}
+
+void	purge_all_memory(t_mlx_data *mlx_data)
+{
+	int	i;
+
+	i = 0;
+	while (mlx_data->map[i])
+		free(mlx_data->map[i++]);
+	free(mlx_data->map);
 }

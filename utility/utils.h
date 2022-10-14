@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:17:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/08 17:58:04 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:01:57 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ int			enemy_movement(t_mlx_data *mlx_data);
 void		move_enemy(char dir, t_mlx_data *mlx_data);
 long long	current_timestamp(void);
 void		screen_points(t_mlx_data *mlx_data);
+void		purge_all_memory(t_mlx_data *mlx_data);
 
 #endif
