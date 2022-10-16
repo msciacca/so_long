@@ -6,7 +6,7 @@
 /*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 23:45:18 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/14 19:59:40 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/16 19:53:04 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,29 @@ char	**initialize_mem(int h, int w)
 
 void	load_map(char *file, char **map)
 {
-	char	*line;
-	int		i;
-	int		k;
-	int		fd;
+	t_map_load_vals	vals;
 
-	i = 0;
-	k = 0;
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
+	vals.i = 0;
+	vals.k = 0;
+	vals.fd = open(file, O_RDONLY);
+	vals.line = get_next_line(vals.fd);
 	while (1)
 	{
-		if (line[i] == '\n')
+		if (vals.line[vals.i] == '\n')
 		{
-			free(line);
-			line = get_next_line(fd);
-			map[k][i] = 0;
-			i = 0;
-			k++;
+			free(vals.line);
+			vals.line = get_next_line(vals.fd);
+			map[vals.k][vals.i] = 0;
+			vals.i = 0;
+			vals.k++;
 		}
-		else if (line[i] == '\0')
+		else if (vals.line[vals.i] == '\0')
 			break ;
-		map[k][i] = line[i];
-		i++;
+		map[vals.k][vals.i] = vals.line[vals.i];
+		vals.i++;
 	}
-	free(line);
-	close(fd);
+	free(vals.line);
+	close(vals.fd);
 }
 
 void	purge_all_memory(t_mlx_data *mlx_data)

@@ -6,7 +6,7 @@
 /*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:17:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/14 19:01:57 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/16 20:14:29 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,30 @@ typedef struct s_mlx_data
 	t_img_struct		ply_img;
 	t_img_cache			images;
 }				t_mlx_data;
+
+typedef struct s_map_load_vals
+{
+	char	*line;
+	int		i;
+	int		k;
+	int		fd;
+}				t_map_load_vals;
+
+typedef struct s_mov_vals
+{
+	int	x;
+	int	y;
+	int	x_new;
+	int	y_new;
+}				t_mov_vals;
+
+typedef struct s_util_lenvals
+{
+	char	*line;
+	int		i;
+	int		count;
+	int		fd;
+}				t_utils_lenvals;
 
 void		ft_putchar(char c);
 void		ft_putstr(char *s);

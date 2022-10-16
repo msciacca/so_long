@@ -6,7 +6,7 @@
 /*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:43:08 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/14 20:00:39 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/16 20:15:39 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,27 @@ int	ft_strlen_gmap(char *file)
 
 int	ft_hlen_map(char *file)
 {
-	char	*line;
-	int		i;
-	int		count;
-	int		fd;
+	t_utils_lenvals	vals;
 
-	i = 0;
-	count = 0;
-	line = "h";
-	fd = open(file, O_RDONLY);
+	vals.i = 0;
+	vals.count = 0;
+	vals.line = "h";
+	vals.fd = open(file, O_RDONLY);
 	while (1)
 	{
-		if (line[i] == '\n' || count == 0)
+		if (vals.line[vals.i] == '\n' || vals.count == 0)
 		{
-			if (line[0] != 'h' && line)
-				free(line);
-			line = get_next_line(fd);
-			i = 0;
-			count++;
+			if (vals.line[0] != 'h' && vals.line)
+				free(vals.line);
+			vals.line = get_next_line(vals.fd);
+			vals.i = 0;
+			vals.count++;
 		}
-		else if (line[i] == '\0')
+		else if (vals.line[vals.i] == '\0')
 			break ;
-		i++;
+		vals.i++;
 	}
-	free(line);
-	close(fd);
-	return (count);
+	free(vals.line);
+	close(vals.fd);
+	return (vals.count);
 }

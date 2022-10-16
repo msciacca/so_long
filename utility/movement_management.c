@@ -6,7 +6,7 @@
 /*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:47:28 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/14 19:03:08 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/16 20:11:56 by matteofilib      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,11 @@ static int	check_collision(t_mlx_data *mlx_data, int x, int y)
 	return (0);
 }
 
-void	move_player(int key, t_mlx_data *mlx_data)
+static void	move_player2(int key, t_mlx_data *mlx_data, t_mov_vals *vals)
 {
-	int	x;
-	int	y;
-	int	x_new;
-	int	y_new;
-
-	x = find_x(mlx_data, 'P');
-	y = find_y(mlx_data, 'P');
-	x_new = x;
-	y_new = y;
-	if (key == 13)
+	if (key == 1)
 	{
-		y_new--;
-		if (mlx_data->collectibles > 0)
-			mlx_data->ply_img = *mlx_data->images.ply_u_bsk;
-		else
-			mlx_data->ply_img = *mlx_data->images.ply_u;
-	}
-	else if (key == 0)
-	{
-		x_new--;
-		if (mlx_data->collectibles > 0)
-			mlx_data->ply_img = *mlx_data->images.ply_l_bsk;
-		else
-			mlx_data->ply_img = *mlx_data->images.ply_l;
-	}
-	else if (key == 1)
-	{
-		y_new++;
+		vals->y_new++;
 		if (mlx_data->collectibles > 0)
 			mlx_data->ply_img = *mlx_data->images.ply_bsk;
 		else
@@ -72,62 +47,93 @@ void	move_player(int key, t_mlx_data *mlx_data)
 	}
 	else if (key == 2)
 	{
-		x_new++;
+		vals->x_new++;
 		if (mlx_data->collectibles > 0)
 			mlx_data->ply_img = *mlx_data->images.ply_r_bsk;
 		else
 			mlx_data->ply_img = *mlx_data->images.ply_r;
 	}
-	if (check_collision(mlx_data, x_new, y_new))
+	if (check_collision(mlx_data, vals->x_new, vals->y_new))
 	{
-		mlx_data->map[y][x] = '0';
-		mlx_data->map[y_new][x_new] = 'P';
+		mlx_data->map[vals->y][vals->x] = '0';
+		mlx_data->map[vals->y_new][vals->x_new] = 'P';
 		mlx_data->movements++;
 		generate_new_frame(mlx_data);
 	}
 }
 
-void	move_enemy(char dir, t_mlx_data *mlx_data)
+static void	move_enemy2(char dir, t_mlx_data *mlx_data, t_mov_vals *vals)
 {
-	int	x;
-	int	y;
-	int	x_new;
-	int	y_new;
-
-	x = find_x(mlx_data, 'N');
-	y = find_y(mlx_data, 'N');
-	x_new = x;
-	y_new = y;
-	if (dir == 'd')
+	if (dir == 'l')
 	{
-		y_new++;
-		mlx_data->enemy_img = *mlx_data->images.enemy;
-	}
-	else if (dir == 'u')
-	{
-		y_new--;
-		mlx_data->enemy_img = *mlx_data->images.enemy_u;
-	}
-	else if (dir == 'r')
-	{
-		x_new++;
-		mlx_data->enemy_img = *mlx_data->images.enemy_r;
-	}
-	else if (dir == 'l')
-	{
-		x_new--;
+		vals->x_new--;
 		mlx_data->enemy_img = *mlx_data->images.enemy_l;
 	}
-	if ((y_new != y || x_new != x) && (mlx_data->map[y_new][x_new] == '0'
-		|| mlx_data->map[y_new][x_new] == '1'))
+	if ((vals->y_new != vals->y || vals->x_new != vals->x)
+		&& (mlx_data->map[vals->y_new][vals->x_new] == '0'
+		|| mlx_data->map[vals->y_new][vals->x_new] == '1'))
 	{
-		mlx_data->map[y][x] = '0';
-		mlx_data->map[y_new][x_new] = 'N';
+		mlx_data->map[vals->y][vals->x] = '0';
+		mlx_data->map[vals->y_new][vals->x_new] = 'N';
 		generate_new_frame(mlx_data);
 	}
-	else if ((y_new != y || x_new != x) && mlx_data->map[y_new][x_new] == 'P')
+	else if ((vals->y_new != vals->y || vals->x_new != vals->x)
+		&& mlx_data->map[vals->y_new][vals->x_new] == 'P')
 	{
 		purge_all_memory(mlx_data);
 		exit (0);
 	}
+}
+
+void	move_player(int key, t_mlx_data *mlx_data)
+{
+	t_mov_vals	vals;
+
+	vals.x = find_x(mlx_data, 'P');
+	vals.y = find_y(mlx_data, 'P');
+	vals.x_new = vals.x;
+	vals.y_new = vals.y;
+	if (key == 13)
+	{
+		vals.y_new--;
+		if (mlx_data->collectibles > 0)
+			mlx_data->ply_img = *mlx_data->images.ply_u_bsk;
+		else
+			mlx_data->ply_img = *mlx_data->images.ply_u;
+	}
+	else if (key == 0)
+	{
+		vals.x_new--;
+		if (mlx_data->collectibles > 0)
+			mlx_data->ply_img = *mlx_data->images.ply_l_bsk;
+		else
+			mlx_data->ply_img = *mlx_data->images.ply_l;
+	}
+	move_player2(key, mlx_data, &vals);
+}
+
+void	move_enemy(char dir, t_mlx_data *mlx_data)
+{
+	t_mov_vals	vals;
+
+	vals.x = find_x(mlx_data, 'N');
+	vals.y = find_y(mlx_data, 'N');
+	vals.x_new = vals.x;
+	vals.y_new = vals.y;
+	if (dir == 'd')
+	{
+		vals.y_new++;
+		mlx_data->enemy_img = *mlx_data->images.enemy;
+	}
+	else if (dir == 'u')
+	{
+		vals.y_new--;
+		mlx_data->enemy_img = *mlx_data->images.enemy_u;
+	}
+	else if (dir == 'r')
+	{
+		vals.x_new++;
+		mlx_data->enemy_img = *mlx_data->images.enemy_r;
+	}
+	move_enemy2(dir, mlx_data, &vals);
 }
