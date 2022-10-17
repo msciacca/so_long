@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screen_rendering.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 22:14:25 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/16 19:06:52 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/17 19:05:49 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	generate_new_frame(t_mlx_data *mlx_data)
 		}
 		i++;
 	}
-	//screen_points(mlx_data);
+	screen_points(mlx_data);
 }
 
 void	load_images(t_mlx_data *mlx_data)

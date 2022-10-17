@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 00:06:53 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/14 19:02:21 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/17 19:37:00 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 int	ft_input(int key, t_mlx_data *mlx_data)
 {
 	if (key == 53)
-	{
-		purge_all_memory(mlx_data);
 		exit(0);
-	}
 	else if (key == 13 || key == 0 || key == 1 || key == 2)
 		move_player(key, mlx_data);
 	return (0);
+}
+
+void	ft_close(int key, t_mlx_data *mlx_data)
+{
+	exit(0);
 }
 
 int	enemy_movement(t_mlx_data *mlx_data)
@@ -36,7 +38,7 @@ int	enemy_movement(t_mlx_data *mlx_data)
 			move_enemy('r', mlx_data);
 		else if ((find_x(mlx_data, 'P') - find_x(mlx_data, 'N')) < 0)
 			move_enemy('l', mlx_data);
-		mlx_data->time_future = current_timestamp() + 125;
+		mlx_data->time_future = current_timestamp() + 185;
 	}
 	return (0);
 }

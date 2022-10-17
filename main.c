@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/16 20:23:37 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/17 19:35:40 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	initialization(char **argv, t_mlx_data *mlx_data)
 	mlx_data->map = initialize_mem(mlx_data->h / 64, mlx_data->w / 64);
 	mlx_data->movements = 0;
 	mlx_data->collectibles = 0;
-	mlx_data->time_future = current_timestamp() + 500;
+	mlx_data->time_future = current_timestamp() + 5000;
 	load_map(argv[1], mlx_data->map);
 	mlx_data->mlx = mlx_init();
 	load_images(mlx_data);
@@ -29,6 +29,7 @@ static void	initialization(char **argv, t_mlx_data *mlx_data)
 			mlx_data->h, "so_long");
 	generate_new_frame(mlx_data);
 	mlx_hook(mlx_data->window, 2, 1L << 0, ft_input, mlx_data);
+	mlx_hook(mlx_data->window, 17, 0, ft_close, mlx_data);
 	mlx_loop_hook(mlx_data->mlx, enemy_movement, mlx_data);
 	mlx_loop(mlx_data->mlx);
 }

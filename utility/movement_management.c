@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_management.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:47:28 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/16 20:11:56 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/17 19:13:29 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	check_collision(t_mlx_data *mlx_data, int x, int y)
 	else if (mlx_data->map[y][x] == 'E' && mlx_data->total_collectibles
 			== mlx_data->collectibles)
 	{
-		purge_all_memory(mlx_data);
 		exit (0);
 	}
 	else if (mlx_data->map[y][x] == 'C')
@@ -29,7 +28,6 @@ static int	check_collision(t_mlx_data *mlx_data, int x, int y)
 	}
 	else if (mlx_data->map[y][x] == 'N')
 	{
-		purge_all_memory(mlx_data);
 		exit (0);
 	}
 	return (0);
@@ -80,7 +78,6 @@ static void	move_enemy2(char dir, t_mlx_data *mlx_data, t_mov_vals *vals)
 	else if ((vals->y_new != vals->y || vals->x_new != vals->x)
 		&& mlx_data->map[vals->y_new][vals->x_new] == 'P')
 	{
-		purge_all_memory(mlx_data);
 		exit (0);
 	}
 }

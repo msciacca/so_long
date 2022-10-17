@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 02:48:55 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/10 00:05:01 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:05:10 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,24 @@ static int	rgb_to_int(double r, double g, double b)
 
 void	screen_points(t_mlx_data *mlx_data)
 {
+	char	*moves;
+	char	*apples;
+
+	moves = ft_itoa(mlx_data->movements);
+	apples = ft_itoa(mlx_data->collectibles);
 	mlx_string_put(mlx_data->mlx, mlx_data->window,
 		mlx_data->w - 70, 24, rgb_to_int(250, 250, 250), "MOVES:");
 	mlx_string_put(mlx_data->mlx, mlx_data->window,
 		mlx_data->w - 26, 24, rgb_to_int(250, 250, 250),
-		ft_itoa(mlx_data->movements));
+		moves);
 	mlx_string_put(mlx_data->mlx, mlx_data->window,
 		mlx_data->w - 70, 36, rgb_to_int(250, 250, 250), "APPLE:");
 	mlx_string_put(mlx_data->mlx, mlx_data->window,
 		mlx_data->w - 26, 36, rgb_to_int(250, 250, 250),
-		ft_itoa(mlx_data->collectibles));
+		apples);
 	ft_printf("Moves: %d\n", mlx_data->movements);
+	free(moves);
+	free(apples);
 }
 
 void	load_images2(t_mlx_data *mlx_data)
