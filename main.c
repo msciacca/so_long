@@ -6,13 +6,12 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:14:05 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/17 19:35:40 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:56:51 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utility/utils.h"
 #include "./mlx/mlx.h"
-#include <stdio.h>
 
 static void	initialization(char **argv, t_mlx_data *mlx_data)
 {
@@ -36,22 +35,23 @@ static void	initialization(char **argv, t_mlx_data *mlx_data)
 
 static int	initiate_validation(int *fd, char **argv, t_mlx_data *mlx_data)
 {
-	fd = open(argv[1], O_RDONLY);
-	if (fd > 0)
+	*fd = open(argv[1], O_RDONLY);
+	if (*fd > 0)
 	{
-		if (validate_map(fd, mlx_data))
+		if (validate_map(*fd, mlx_data))
 		{
 			console_error("Invalid map file");
 			return (0);
 		}
 		else
-			ft_putstr("OK!\n");
+			ft_printf("OK!\n");
 	}
 	else
 	{
 		console_error("Could not read map file");
 		return (0);
 	}
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -60,12 +60,18 @@ int	main(int argc, char **argv)
 	t_mlx_data	mlx_data;
 
 	if (argc < 2)
+	{
 		console_error("No map file provided");
+		return (0);
+	}
 	else if (argc > 2)
+	{
 		console_error("Too many arguments");
+		return (0);
+	}
 	else
-		initiate_validation(&fd, argv, &mlx_data);
+		if (!initiate_validation(&fd, argv, &mlx_data))
+			return (0);
 	initialization(argv, &mlx_data);
 	close(fd);
-	return (0);
 }

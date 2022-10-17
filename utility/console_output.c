@@ -6,7 +6,7 @@
 /*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:15:33 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/10 00:01:52 by msciacca         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:50:40 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,5 @@ void	ft_putstr(char *s)
 
 void	console_error(char *s)
 {
-	ft_putstr("ERROR: ");
-	ft_putstr(s);
-	ft_putchar('\n');
+	ft_printf("ERROR: %s\n", s);
 }
