@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matteofilibertosciacca <matteofiliberto    +#+  +:+       +#+        */
+/*   By: msciacca <msciacca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:13:26 by msciacca          #+#    #+#             */
-/*   Updated: 2022/10/14 20:01:41 by matteofilib      ###   ########.fr       */
+/*   Updated: 2022/10/17 21:00:07 by msciacca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ static int	validate_map2(int fd, t_val_components *c)
 			c->line = get_next_line(fd);
 			c->i = -1;
 			c->count++;
-			if (validate_line_len(c))
+			if (validate_line_len(c) || validate_borders(c))
+			{
+				free(c->line);
 				return (1);
-			if (validate_borders(c))
-				return (1);
+			}
 			validate_components(c);
 		}
 		else if (c->line[c->i] == '\0')
